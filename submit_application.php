@@ -21,11 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // If there are no errors, process the application
     if (empty($errors)) {
         // Email configuration
-        $to = "your-email@example.com"; // Change to your email
+        $to = "dimoskiko09@gmail.com"; // Change to your email
         $subject = "New Application from $username";
         $message = "Username: $username\nAge: $age\nExperience: $experience";
-        $headers = "From: no-reply@example.com\r\n"; // Change to your email
-        $headers .= "Reply-To: no-reply@example.com\r\n"; // Change to your email
+        $headers = "From: dimoskiko09@gmail.com\r\n"; // Change to your email
+        $headers .= "Reply-To: dimoskiko09@gmail.com\r\n"; // Change to your email
 
         // Send the email
         if (mail($to, $subject, $message, $headers)) {
