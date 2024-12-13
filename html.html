@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA Roleplay Server</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to [BALKAN BALKATON ROLEPLAY]</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#rules">Rules</a></li>
+                <li><a href="#application">Application</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h2>Join Our GTA Roleplay Community!</h2>
+        <p>Experience immersive roleplay in the world of GTA. Join us today!</p>
+        <img src="https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png" alt="GTA Roleplay" class="responsive">
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>[SERVER KREATOR JE KIKODIMOS ON JE URADIO CEO SERVER SAM 
+            PODRZITE KLIKOM NA REGISTRACIJU ZA SERVER DA BI STE USLI NA SERVER UDJITE I NA DISCORD]</p>
+    </section>
+
+    <section id="rules">
+        <h2>Pravila Servera</h2>
+        <ul>
+            <li>Rule 1: [Postovajne staff teama u sprotvno BAN]</li>
+            <li>Rule 2: [Description]</li>
+            <li>Rule 3: [Description]</li>
+        </ul>
+    </section>
+
+    <section id="application">
+        <h2>Registracija za ulaz na server</h2>
+        <form action="submit_application.php" method="post">
+            <label for="username">IME:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="age">GODINE:</label>
+            <input type="number" id="age" name="age" required>
+            <label for="experience">Roleplay ISKUSTVO:</label>
+            <textarea id="experience" name="experience" required></textarea>
+            <button type="submit">POTVRDITE REGISTRACIJU</button>
+        </form>
+    </section>
+
+    <section id="community">
+        <h2>pridruzite se nasem Communityu</h2>
+        <p>udjite na nas Discord: [soon]</p>
+    </section>
+
+    <section id="events">
+        <h2>Sledeci Event</h2>
+        <p>[SERVER UP 01.09.2025---15:00]</p>
+    </section>
+
+    <section id="contact">
+        <h2>Kontaktiraj Nas</h2>
+        <p>Email: dimoskiko09@gmail.com</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 [Dimosfamilydevelopment]. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
+<link rel="stylesheet" href="css.css">
+
+<?php
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Collect and sanitize input data
+    $username = htmlspecialchars(trim($_POST['username']));
+    $age = htmlspecialchars(trim($_POST['age']));
+    $experience = htmlspecialchars(trim($_POST['experience']));
+
+    // Validate input data
+    $errors = [];
+    if (empty($username) || strlen($username) < 3) {
+        $errors[] = "Username must be at least 3 characters long.";
+    }
+    if (empty($age) || !is_numeric($age) || $age < 13) { // Example: minimum age is 13
+        $errors[] = "You must be at least 13 years old to apply.";
+    }
+    if (empty($experience)) {
+        $errors[] = "Please provide your roleplay experience.";
+    }
+
+    // If there are no errors, process the application
+    if (empty($errors)) {
+        // Email configuration
+        $to = "your-email@example.com"; // Change to your email
+        $subject = "New Application from $username";
+        $message = "Username: $username\nAge: $age\nExperience: $experience";
+        $headers = "From: no-reply@example.com\r\n"; // Change to your email
+        $headers .= "Reply-To: no-reply@example.com\r\n"; // Change to your email
+
+        // Send the email
+        if (mail($to, $subject, $message, $headers)) {
+            echo "<p>Application submitted successfully! Thank you for applying.</p>";
+        } else {
+            echo "<p>There was an error submitting your application. Please try again later.</p>";
+        }
+    } else {
+        // Display errors
+        foreach ($errors as $error) {
+            echo "<p style='color:red;'>$error</p>";
+        }
+    }
+} else {
+    // Redirect to the application form if accessed directly
+    header("Location: html.html"); // Change to your main page
+    exit();
+}
+?>
